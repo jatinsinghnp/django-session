@@ -100,7 +100,11 @@ clearsessions.
  Session Methods
 set test cookie() – It sets a test cookie to determine whether the user's browser supports cookies.
 Due to the way cookies work, you won't be able to test this until the user's next page request.
+
+
 test_cookie_worked() – It returns either True or False, depending on whether the user's browser
 accepted the test cookie. Due to the way cookies work, you'll have to call set_test_cookie() on a
 previous, separate page request.
+
+
 delete_test_cookie() – It deletes the test cookie. Use this to clean up after yourself.
