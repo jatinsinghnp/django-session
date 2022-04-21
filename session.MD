@@ -58,3 +58,40 @@ value to the dictionary.
 flush() -
 used if you want to ensure that the previous session data can't be accessed again from the user's
 browser (for example, the django.contrib.auth.logout() function calls it).
+
+             Session Methods
+get_session_cookie_age() - It returns the age of session cookies, in seconds. Defaults to
+SESSION_COOKIE_AGE.
+set expiry(value) It sets the expiration time for the session. You can pass a number of different
+values:
+If value is an integer, the session will expire after that many seconds of inactivity. For example,
+calling request.session.set_expiry(300) would make the session expire in 5 minutes.
+If value is a datetime or timedelta object, the session will expire at that specific date/time. Note that
+datetime and timedelta values are only serializable if you are using the PickleSerializer.
+If value is 0, the user's session cookie will expire when the user's Web browser is closed.
+If value is None, the session reverts to using the global session expiry policy.
+Reading a session is not considered activity for expiration purposes. Session expiration is computed
+from the last time the session was modified.
+ Session Methods
+
+
+get_expiry_age() - It returns the number of seconds until this session expires. For sessions with no
+custom expiration (or those set to expire at browser close), this will equal
+SESSION_COOKIE_AGE.
+This function accepts two optional keyword arguments:
+modification: last modification of the session, as a datetime object. Defaults to the current time.
+expiry: expiry information for the session, as a datetime object, an int (in seconds), or Nne. Defaults
+to the value stored in the session by set expiry(), if there is one, or None.
+get_expiry_date() - It returns the date this session will expire. For sessions with no custom expiration
+(or those set to expire at browser close), this will equal the date SESSION_COOKIE_AGE seconds
+from now.
+This function accepts the same keyword arguments as get_expiry_age().
+
+
+ Session Methods
+get expire_at_browser_close() - It returns either True or False, depending on whether the user's
+
+
+session cookie will expire when the user's Web browser is closed.
+clear_expired() – It removes expired sessions from the session store. This class method is called by
+clearsessions.
