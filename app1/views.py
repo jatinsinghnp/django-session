@@ -19,7 +19,7 @@ def setsession(request):
 
 def getseeion(request):
     name = request.session.get("name",default=None)
-    cart = request.session["cart"]
+    cart = request.session.get("cart",default=None)
     return render(
         request,
         "getsession.html",
