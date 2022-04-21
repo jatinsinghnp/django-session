@@ -9,8 +9,9 @@
   <body>
     <h4>session get</h4>
     <h3>{{name}}</h3>
-    {{request.session.get_session_cookie_age}}
-    {{request.session.get_expiry_age}}
-    {{request.session.get_session_date}}
+    {{request.session.get_session_cookie_age}} <br />
+    {{request.session.get_expiry_age}} <br />
+    {{request.session.get_expiry_date}} <br />
+    {{request.session.get_expire_at_browser_close}} <br />
   </body>
 </html>
