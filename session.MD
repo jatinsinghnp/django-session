@@ -128,3 +128,16 @@ Be cautious when updating this setting on a production site. If you update this 
 domain cookies on a site that previously used standard domain cookies, existing user cookies will be
 set to the old domain. This may result in them being unable to log in as long as these cookies persist.
 Default: None
+
+
+             Session Settings
+SESSION_COOKIE_HTTPONLY - Whether to use HttpOnly flag on the session cookie. If this is set
+to True, client-side JavaScript will not be able to access the session cookie.
+HttpOnly is a flag included in a Set-Cookie HTTP response header. It's part of the RFC 6265
+standard for cookies and can be a useful way to mitigate the risk of a client-side script accessing the
+protected cookie data.
+This makes it less trivial for an attacker to escalate a cross-site scripting vulnerability into full
+hijacking of a user's session. There aren't many good reasons for turning this off. Your code
+shouldn't read session cookies from JavaScript. Default: True
+SESSION_COOKIE_NAME - The name of the cookie to use for sessions. This can be whatever you
+want (as long as it's different from the other cookie names in your application). Default: 'sessionid'
