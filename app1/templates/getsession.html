@@ -11,10 +11,9 @@
     {% comment %} <h5>{{name}}</h5>
     <h5>{{cart}}</h5> {% endcomment %}
     {% comment %} or  {% endcomment %}
-    {% for key in  request.session.keys %}
+    {% for key in keys %}
     {{key}}
-    {{name.name}}
-    {{cart.cart}}
+    
     
     {% endfor %}
 </body>
