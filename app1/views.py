@@ -19,6 +19,8 @@ def getseeion(request):
         # name = request.session.get("name", default=None)
         # cart = request.session.get("cart", default=None)
         keys = request.session.keys()
+        items = request.session.items()
+        age = request.session.setdefault("age", "26")
     except NameError:
         print("error the session is empty")
 
@@ -28,7 +30,9 @@ def getseeion(request):
         {
             # "name": name,
             # "cart": cart,
-            "keys": keys
+            "keys": keys,
+            "items": items,
+            "age": age,
         },
     )
 

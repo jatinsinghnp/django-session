@@ -12,9 +12,24 @@
     <h5>{{cart}}</h5> {% endcomment %}
     {% comment %} or  {% endcomment %}
     {% for key in keys %}
-    {{key}}
+    {{key}} <br>
     
     
     {% endfor %}
+
+    {% for item in items %}
+    {{item}} <br>
+    {% endfor %}
+
+
+    or <br>
+     
+    {% for key,value in items  %}
+    {{key}} {{value}} <br>
+    {% endfor %}
+
+    set default <br>
+
+    {{age}}
 </body>
 </html>
