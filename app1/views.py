@@ -1,14 +1,8 @@
-from email.policy import default
 from django.shortcuts import render
-
 from django.http import HttpResponse
-
 # Create your views here.
-
-
 def home(request):
     return HttpResponse("hellow world i am a hacker man 124 ")
-
 
 def setsession(request):
 
@@ -18,8 +12,13 @@ def setsession(request):
 
 
 def getseeion(request):
-    name = request.session.get("name",default=None)
-    cart = request.session.get("cart",default=None)
+    try:
+        print(request.session)  # session object is here
+        name = request.session.get("name", default=None)
+        cart = request.session.get("cart", default=None)
+    except NameError:
+        print("error the session is empty")
+
     return render(
         request,
         "getsession.html",
@@ -28,3 +27,10 @@ def getseeion(request):
             "cart": cart,
         },
     )
+
+def delseeion(request):
+    if "name" and "cart" in request.session:
+        del request.session["name"]
+        del request.session["cart"]
+
+    return render(request, "delsession.html")
