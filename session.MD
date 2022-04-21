@@ -118,6 +118,7 @@ previous, separate page request.
 delete_test_cookie() – It deletes the test cookie. Use this to clean up after yourself.
 
         #Session Settings
+
 SESSION CACHE ALIAS - If you're using cache-based session storage, this selects the cache to
 use. Default: 'default'
 SESSION_COOKIE_AGE - The age of session cookies, in seconds. Default: 1209600 (2 weeks, in
@@ -129,8 +130,8 @@ domain cookies on a site that previously used standard domain cookies, existing 
 set to the old domain. This may result in them being unable to log in as long as these cookies persist.
 Default: None
 
-
              Session Settings
+
 SESSION_COOKIE_HTTPONLY - Whether to use HttpOnly flag on the session cookie. If this is set
 to True, client-side JavaScript will not be able to access the session cookie.
 HttpOnly is a flag included in a Set-Cookie HTTP response header. It's part of the RFC 6265
@@ -141,3 +142,74 @@ hijacking of a user's session. There aren't many good reasons for turning this o
 shouldn't read session cookies from JavaScript. Default: True
 SESSION_COOKIE_NAME - The name of the cookie to use for sessions. This can be whatever you
 want (as long as it's different from the other cookie names in your application). Default: 'sessionid'
+
+                  Session Settings
+
+SESSION_COOKIE_HTTPONLY - Whether to use HttpOnly flag on the session cookie. If this is set
+to True, client-side JavaScript will not be able to access the session cookie.
+HttpOnly is a flag included in a Set-Cookie HTTP response header. It's part of the RFC 6265
+standard for cookies and can be a useful way to mitigate the risk of a client-side script accessing the
+protected cookie data.
+This makes it less trivial for an attacker to escalate a cross-site scripting vulnerability into full
+hijacking of a user's session. There aren't many good reasons for turning this off. Your code
+shouldn't read session cookies from JavaScript. Default: True
+SESSION_COOKIE_NAME - The name of the cookie to use for sessions. This can be whatever you
+want (as long as it's different from the other cookie names in your application). Default: 'sessionid'
+
+      Session Settings
+
+SESSION COOKIE SAMESITE - The value of the SameSite flag on the session cookie. This flag
+prevents the cookie from being sent in cross-site requests thus preventing CSRF attacks and making
+some methods of stealing session cookie impossible.
+Possible values for the setting are:
+'Strict': prevents the cookie from being sent by the browser to the target site in all cross-site browsing
+context, even when following a regular link.
+For example, for a GitHub-like website this would mean that if a logged-in user follows a link to a
+private GitHub project posted on a corporate discussion forum or email, GitHub will not receive the
+session cookie and the user won't be able to access the project. A bank website, however, most likely
+doesn't want to allow any transactional pages to be linked from external sites so the 'Strict' flag
+would be appropriate.
+'Lax' (default): provides a balance between security and usability for websites that want to maintain
+user's logged-in session after the user arrives from an external link.
+In the GitHub scenario, the session cookie would be allowed when following a regular link from an
+external website and be blocked in CSRF-prone request methods (e.g. POST).
+None: disables the flag.
+
+            Session Settings
+
+SESSION COOKIE SECURE - Whether to use a secure cookie for the session cookie. If this is set
+to True, the cookie will be marked as "secure", which means browsers may ensure that the cookie is
+only sent under an HTTPS connection.
+Leaving this setting off isn't a good idea because an attacker could capture an unencrypted session
+cookie with a packet sniffer and use the cookie to hijack the user's session. Default: False
+SESSION ENGINE – Controls where Django stores session data. Included engines are:
+'django.contrib.sessions.backends.db'
+'django.contrib.sessions.backends.file'
+'django.contrib.sessions.backends.cache'
+'django.contrib.sessions.backends.cached_db'
+'django.contrib.sessions.backends.signed_cookies'
+Default: 'django.contrib.sessions.backends.db'
+
+            Session Settings
+
+SESSION EXPIRE AT BROWSER CLOSE - Whether to expire the session when the user closes
+their browser. Default: False
+SESSION_FILE_PATH - If you're using file-based session storage, this sets the directory in which
+Django will store session data. When the default value (None) is used, Django will use the standard
+temporary directory for the system. Default: None
+SESSION_SAVE_EVERY_REQUEST - Whether to save the session data on every request. If this is
+False (default), then the session data will only be saved if it has been modified that is, if any of its
+dictionary values have been assigned or deleted. Empty sessions won't be created, even if this setting
+is active. Default: False
+
+                  Session Settings
+
+SESSION EXPIRE AT BROWSER CLOSE - Whether to expire the session when the user closes
+their browser. Default: False
+SESSION_FILE_PATH - If you're using file-based session storage, this sets the directory in which
+Django will store session data. When the default value (None) is used, Django will use the standard
+temporary directory for the system. Default: None
+SESSION_SAVE_EVERY_REQUEST - Whether to save the session data on every request. If this is
+False (default), then the session data will only be saved if it has been modified that is, if any of its
+dictionary values have been assigned or deleted. Empty sessions won't be created, even if this setting
+is active. Default: False
