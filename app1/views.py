@@ -9,30 +9,19 @@ def home(request):
 def setsession(request):
 
     request.session["name"] = "jatin singh"
-    request.session["cart"] = "hellow world"
     return render(request, "setsession.html")
 
 
 def getseeion(request):
-    try:
-        print(request.session)  # session object is here
-        # name = request.session.get("name", default=None)
-        # cart = request.session.get("cart", default=None)
-        keys = request.session.keys()
-        items = request.session.items()
-        # age = request.session.setdefault("age", "26")
-    except NameError:
-        print("error the session is empty")
 
+    # cart get method added
+    name = request.session["name"]
     return render(
         request,
         "getsession.html",
         {
-            # "name": name,
-            # "cart": cart,
-            "keys": keys,
-            "items": items,
-            # "age": age,
+            "name": name,
+           
         },
     )
 
