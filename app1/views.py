@@ -20,7 +20,7 @@ def getseeion(request):
         # cart = request.session.get("cart", default=None)
         keys = request.session.keys()
         items = request.session.items()
-        age = request.session.setdefault("age", "26")
+        # age = request.session.setdefault("age", "26")
     except NameError:
         print("error the session is empty")
 
@@ -32,14 +32,15 @@ def getseeion(request):
             # "cart": cart,
             "keys": keys,
             "items": items,
-            "age": age,
+            # "age": age,
         },
     )
 
 
 def delseeion(request):
-    if "name" and "cart" in request.session:
-        del request.session["name"]
-        del request.session["cart"]
+    # if "name" and "cart" in request.session:
+    #     del request.session["name"]
+    #     del request.session["cart"]
 
+    request.session.flush()
     return render(request, "delsession.html")
